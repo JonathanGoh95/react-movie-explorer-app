@@ -31,5 +31,8 @@ export default [
       "react/prop-types": "off", // add this line
       "react/no-unescaped-entities": "off", // add this line
     },
+    env: {
+      node: true, // For allowing the use of node variables
+    },
   },
 ];
