@@ -1,10 +1,8 @@
-const cors = require("cors");
-app.use(cors());
-require("dotenv").config();
+const BASE_URL = `http://www.omdbapi.com/?apikey=${
+  import.meta.env.OMDB_API_KEY
+}`;
 
-const BASE_URL = `http://www.omdbapi.com/?apikey=${process.env.API_KEY}`;
-
-const movie = async (filter) => {
+const movies = async (filter) => {
   try {
     const query = `&s=${filter}`;
     const res = await fetch(BASE_URL + query);
@@ -19,4 +17,4 @@ const movie = async (filter) => {
   }
 };
 
-export { movie };
+export { movies };
