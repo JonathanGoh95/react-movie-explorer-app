@@ -2,22 +2,34 @@ import { useState } from 'react'
 import { Route, Routes } from 'react-router'
 import NavBar from './components/NavBar'
 import SearchPage from './pages/SearchPage'
+import HomePage from './pages/HomePage'
+
 import * as movieService from './services/movieService'
 import './App.css'
+import MovieDetails from './pages/MovieDetails'
 
 export default function App() {
   const [movies,setMovies] = useState([])
+  const [selectedMovie,setSelectedMovie] = useState(null)
 
+  const fetchData = async (query) => {
+    const data = await movieService.movies(query)
+    setMovies(data.Search || [])
+  }
+
+  const fetchMovieDetails = async (imdbID) => {
+    const details = await movieService.details(imdbID)
+    setSelectedMovie(details)
+  }
+  
   return (
     <div class='text-center'>
-      <div class='bg-[url(./images/banner.jpg)] bg-cover text-white'><h1 class="text-6xl font-bold p-8">Movie Explorer</h1></div>
-      <NavBar />
+      <div class='bg-[url(./images/banner.jpg)] bg-cover text-white'><h1 class="text-6xl font-bold p-8">🎬 Movie Explorer 🎬</h1></div>
+      <NavBar clearMovies={()=>setMovies([])}/>
       <Routes>
-        <Route path='/' element={<h1 class='text-3xl p-5'><span class='font-bold'>Welcome!</span><br/><br/>
-        Click on the 'Search for Movies' link to begin searching!<br/><br/>
-        Click on the 'Favourite Movies' link to view your favourite movies!
-        </h1>}></Route>
-        <Route path='/search' element={<SearchPage movies={movies} setMovies={setMovies} />}></Route>
+        <Route path='/' element={<HomePage />}></Route>
+        <Route path='/search' element={<SearchPage movies={movies} setMovies={setMovies} selectedMovie={selectedMovie} fetchData={fetchData} fetchMovieDetails={fetchMovieDetails}/>}></Route>
+        <Route path='/movie/:imdbID' element={<MovieDetails selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie}/>}></Route>
         {/* <Route path='/favourites' element={}></Route> */}
       </Routes>
     </div>
