@@ -19,7 +19,7 @@ const movies = async (term) => {
 
 const details = async (imdbID) => {
   try {
-    const movieID = `&i=${imdbID}`;
+    const movieID = `&i=${imdbID}&plot=full`;
     const res = await fetch(BASE_URL + movieID);
     if (!res.ok) {
       console.log(`Status: ${res.status}`);
