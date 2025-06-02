@@ -1,1 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Pompiere&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-pompiere: "Pompiere", sans-serif;
+}

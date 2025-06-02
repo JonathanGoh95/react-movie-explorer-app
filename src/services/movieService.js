@@ -1,5 +1,5 @@
 const BASE_URL = `http://www.omdbapi.com/?apikey=${
-  import.meta.env.OMDB_API_KEY
+  import.meta.env.VITE_OMDB_API_KEY
 }`;
 
 const movies = async (filter) => {
