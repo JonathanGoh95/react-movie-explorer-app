@@ -19,11 +19,6 @@ export default function App() {
     setMovies(data || [])
   }
 
-  /* const fetchDataWithYear = async (query,year,selectedPage) => {
-    const data = 
-    setMovies(data || [])
-  } */
-
   const fetchMovieDetails = async (imdbID) => {
     const details = await movieService.details(imdbID)
     setSelectedMovie(details)

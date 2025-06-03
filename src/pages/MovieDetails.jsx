@@ -14,6 +14,8 @@ export default function MovieDetails({selectedMovie, setSelectedMovie}) {
         <div className="flex flex-col gap-5 items-center justify-center p-6 border-2 w-1/2 bg-black/15">
             <h2 className="font-bold mb-2">{selectedMovie.Title} ({selectedMovie.Year})</h2>
             <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="border-2 rounded-lg mb-3" />
+            <p><strong>Release Date:</strong> {selectedMovie.Released}</p>
+            <p><strong>Runtime:</strong> {selectedMovie.Runtime}</p>
             <p><strong>Director(s):</strong> {selectedMovie.Director}</p>
             <p><strong>Writer(s):</strong> {selectedMovie.Writer}</p>
             <p><strong>Actors:</strong> {selectedMovie.Actors}</p>
