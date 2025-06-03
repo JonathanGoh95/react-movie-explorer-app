@@ -1,8 +1,8 @@
 const BASE_URL = `http://www.omdbapi.com/?apikey=c7933753`;
 
-const movies = async (term) => {
+/* const movies = async (term, selectedPage) => {
   try {
-    const query = `&s=${term}`;
+    const query = `&s=${term}&page=${selectedPage}`;
     const res = await fetch(BASE_URL + query);
     if (!res.ok) {
       console.log(`Status: ${res.status}`);
@@ -13,11 +13,11 @@ const movies = async (term) => {
   } catch (err) {
     console.log(err);
   }
-};
+}; */
 
-const moviesYear = async (term, year) => {
+const movies = async (term, year, selectedPage) => {
   try {
-    const query = `&s=${term}&y=${year}`;
+    const query = `&s=${term}&y=${year}&page=${selectedPage}`;
     const res = await fetch(BASE_URL + query);
     if (!res.ok) {
       console.log(`Status: ${res.status}`);
@@ -45,4 +45,4 @@ const details = async (imdbID) => {
   }
 };
 
-export { movies, details, moviesYear };
+export { movies, details };
