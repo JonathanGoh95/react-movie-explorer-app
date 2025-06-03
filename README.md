@@ -28,15 +28,15 @@
 
 ## Project Wireframes
 
-![Home Page](https://github.com/JonathanGoh95/react-movie-explorer-app/blob/main/images/HomePage.jpg)
+![Home Page](./images/HomePage.JPG)
 
-![Search Page Before](https://github.com/JonathanGoh95/react-movie-explorer-app/blob/main/images/SearchPage_Before.jpg)
+![Search Page Before](./images/SearchPage_Before.JPG)
 
-![Search Page After](https://github.com/JonathanGoh95/react-movie-explorer-app/blob/main/images/SearchPage_After.jpg)
+![Search Page After](./images/SearchPage_After.JPG)
 
-![Movie Details](https://github.com/JonathanGoh95/react-movie-explorer-app/blob/main/images/MovieDetails.jpg)
+![Movie Details](./images/MovieDetails.JPG)
 
-![Favourite Movies](https://github.com/JonathanGoh95/react-movie-explorer-app/blob/main/images/FavouriteMovies.jpg)
+![Favourite Movies](./images/FavouriteMovies.JPG)
 
 ## References
 
