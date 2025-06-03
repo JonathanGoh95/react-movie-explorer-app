@@ -47,7 +47,8 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
             ))}
         </div>
         {movies.Search && <>
-            <div className="text-2xl flex justify-center gap-3">
+            <h3 className="text-2xl flex justify-center mb-2 font-bold">Page Number(s):</h3>
+            <div className="text-2xl flex justify-center gap-3 mb-4">
                 <button
                     className="border-2 px-2 font-bold bg-white rounded-md"
                     onClick={() => setPageIndex((i) => Math.max(i - 1, 0))}
