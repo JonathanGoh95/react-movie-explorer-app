@@ -11,9 +11,15 @@ import MovieDetails from './pages/MovieDetails'
 export default function App() {
   const [movies,setMovies] = useState([])
   const [selectedMovie,setSelectedMovie] = useState(null)
+  const [movieYear,setMovieYear] = useState('')
 
   const fetchData = async (query) => {
     const data = await movieService.movies(query)
+    setMovies(data.Search || [])
+  }
+
+  const fetchDataWithYear = async (query,year) => {
+    const data = await movieService.moviesYear(query,year)
     setMovies(data.Search || [])
   }
 
@@ -28,7 +34,7 @@ export default function App() {
       <NavBar clearMovies={()=>setMovies([])}/>
       <Routes>
         <Route path='/' element={<HomePage />}></Route>
-        <Route path='/search' element={<SearchPage movies={movies} setMovies={setMovies} selectedMovie={selectedMovie} fetchData={fetchData} fetchMovieDetails={fetchMovieDetails}/>}></Route>
+        <Route path='/search' element={<SearchPage movies={movies} setMovies={setMovies} selectedMovie={selectedMovie} fetchData={fetchData} fetchDataWithYear={fetchDataWithYear} fetchMovieDetails={fetchMovieDetails} movieYear={movieYear} setMovieYear={setMovieYear}/>}></Route>
         <Route path='/movie/:imdbID' element={<MovieDetails selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie}/>}></Route>
         {/* <Route path='/favourites' element={}></Route> */}
       </Routes>

@@ -17,6 +17,7 @@ export default function SearchResults({movies, fetchMovieDetails,selectedMovie})
                 <h2 class="font-bold mt-2">{movie.Title}</h2>
                 <p>{movie.Year}</p>
                 <p>Type: {String(movie.Type).charAt(0).toUpperCase() + String(movie.Type).slice(1)}</p>
+                
           </div>
             ))}
         </div>

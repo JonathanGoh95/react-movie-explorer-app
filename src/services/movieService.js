@@ -1,10 +1,23 @@
-const BASE_URL = `http://www.omdbapi.com/?apikey=${
-  import.meta.env.VITE_OMDB_API_KEY
-}`;
+const BASE_URL = `http://www.omdbapi.com/?apikey=c7933753`;
 
 const movies = async (term) => {
   try {
     const query = `&s=${term}`;
+    const res = await fetch(BASE_URL + query);
+    if (!res.ok) {
+      console.log(`Status: ${res.status}`);
+    }
+    const data = await res.json();
+    console.log("Data:", data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const moviesYear = async (term, year) => {
+  try {
+    const query = `&s=${term}&y=${year}`;
     const res = await fetch(BASE_URL + query);
     if (!res.ok) {
       console.log(`Status: ${res.status}`);
@@ -32,4 +45,4 @@ const details = async (imdbID) => {
   }
 };
 
-export { movies, details };
+export { movies, details, moviesYear };
