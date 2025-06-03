@@ -41,3 +41,4 @@
 ## References
 
 - [Open Movie Database API (OMDb)](https://omdbapi.com)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
