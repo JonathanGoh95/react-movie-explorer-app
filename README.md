@@ -21,9 +21,9 @@
 
 ## User Stories
 
-- As a user, I should be able to search for a movie of my choice by its title or year released and view its relevant details, such as its movie poster, its runtime and a short synopsis, etc.
-- As a user, I should be able to view the results of my search term at a glance
-- As a user, I should be able to click on the result that I want and view it more comprehensively (Name of Director, Genre, Full Plot Details, etc.).
+- As a user, I should be able to search for a movie of my choice by its title, or release year for better specificity and view its relevant details; such as its title, movie poster, year released and media type (i.e. Movie, Series, Episode).
+- As a user, I should be able to view the results of my search term at a glance, with page navigation at the bottom of the page to view the rest of the results in groups of 10 (as per the result limit in the fetched JSON file)
+- As a user, I should be able to click on the movie that I want and view it more comprehensively (i.e. Name of Director, Writer(s), Actor(s), Genre(s), IMDb Rating and Full Plot Details).
 - As a user, I should be able to keep track of which are my favorite movies. (via Airtable)
 
 ## Project Wireframes

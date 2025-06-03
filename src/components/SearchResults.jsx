@@ -12,7 +12,7 @@ const numGroup = (array, size) => {
 export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear}) {
     const [pageIndex, setPageIndex] = useState(0);
     const navigate = useNavigate()
-    const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages array changes, so as to optimize performance
+    const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array, so as to optimize performance
 
     const handleClick = (imdbIDClick) => {
         fetchMovieDetails(imdbIDClick)
