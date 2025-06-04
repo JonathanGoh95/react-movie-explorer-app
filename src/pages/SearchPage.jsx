@@ -9,7 +9,7 @@ export default function SearchPage({movies,fetchData,fetchMovieDetails,movieYear
     return(
         <>
             <h1 className='text-4xl p-5 font-bold'>Search for a Movie (Specify the Movie Release Year for better accuracy)</h1>
-            <SearchBar movies={movies} fetchData={fetchData} movieYear={movieYear} setMovieYear={setMovieYear} setPages={setPages} selectedPage={selectedPage} query={query} setQuery={setQuery}/>
+            <SearchBar movies={movies} fetchData={fetchData} movieYear={movieYear} setMovieYear={setMovieYear} setPages={setPages} selectedPage={selectedPage} setSelectedPage={setSelectedPage} query={query} setQuery={setQuery}/>
             <SearchResults movies={movies} fetchMovieDetails={fetchMovieDetails} pages={pages} selectedPage={selectedPage} setSelectedPage={setSelectedPage} fetchData={fetchData} query={query} movieYear={movieYear}/>
         </>
     )

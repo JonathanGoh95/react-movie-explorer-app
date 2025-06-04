@@ -1,11 +1,14 @@
 import { useEffect } from "react"
+import { useNavigate } from "react-router";
 
+export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPages,selectedPage,setSelectedPage,query,setQuery}) {
+    const navigate = useNavigate()
 
-export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPages,selectedPage,query,setQuery}) {
-    
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetchData(query,movieYear,selectedPage)
+        fetchData(query,movieYear,selectedPage)     
+        selectedPage !== 1 && setSelectedPage(1)    // Resets the results page back to the first page whenever a new search is conducted
+        navigate(`/search/?page=1`)                 // Resets the Page Count of the URL to 1 whenever a new search is conducted
     }
     
     useEffect(()=>{     // Sets the Pages state, but only when the movies and setPages states changes
