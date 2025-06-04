@@ -1,14 +1,17 @@
+// Constant Variables for Easy Reusability
 const BASE_URL = `http://www.omdbapi.com/?apikey=c7933753`;
 const AIRTABLE_BASE = `appiKbPo7d5P9pnCG`;
 const AIRTABLE_TABLE = `tblcMlwFSdnAcvIvt`;
 const AIRTABLE_API_KEY = `pathY8nl4S5cr40VQ.585f4ba1783e408435d65b4367715394bcd6ae2243f4cc80a5ece02739996070`;
 const AIRTABLE_URL = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
 
-const headers = {
+// Authorization Data for Airtable
+const headersData = {
   Authorization: `Bearer ${AIRTABLE_API_KEY}`,
   "Content-Type": "application/json",
 };
 
+// Fetches the API data from OMDb
 const movies = async (term, year, selectedPage) => {
   try {
     const query = `&s=${term}&y=${year}&page=${selectedPage}`;
@@ -24,6 +27,7 @@ const movies = async (term, year, selectedPage) => {
   }
 };
 
+// Fetches Specific Movie Details Data from OMDb
 const details = async (imdbID) => {
   try {
     const movieID = `&i=${imdbID}&plot=full`;
@@ -39,11 +43,31 @@ const details = async (imdbID) => {
   }
 };
 
+// Fetches Favourite Movies Data from Airtable
+async function favourites() {
+  try {
+    const response = await fetch(AIRTABLE_URL, {
+      headers: {
+        Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+// Creates Favourite Movies Data to Airtable
 async function create(movie) {
   try {
     const response = await fetch(AIRTABLE_URL, {
       method: "POST",
-      headers,
+      headersData,
       body: JSON.stringify({
         fields: {
           Title: movie.Title,
@@ -70,6 +94,7 @@ async function create(movie) {
   }
 }
 
+// Delete Favourite Movies Data from Airtable
 async function destroy(imdbID) {
   try {
     const response = await fetch(AIRTABLE_URL + `/${imdbID}`, {
@@ -88,4 +113,4 @@ async function destroy(imdbID) {
   }
 }
 
-export { movies, details, create, destroy };
+export { movies, details, favourites, create, destroy };
