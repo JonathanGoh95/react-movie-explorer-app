@@ -24,6 +24,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
         if (!isNaN(pageNum) && pageNum > 0) {
             setSelectedPage(pageNum);
         }
+        navigate(`/search/?page=${pageNum}`)    // Directly stores the pageNum variable into the URL instead of state, as it requires time to update to the correct value
     }
 
     useEffect(() => {
