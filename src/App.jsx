@@ -32,7 +32,8 @@ export default function App() {
   useEffect(()=>{
     const getFavourites = async () => {
         const data = await movieService.favourites()
-        setFavourites(data || [])
+        const dataFields = data.records.map((record)=>record.fields)
+        setFavourites(dataFields || [])
     }
     getFavourites()
   }, [])

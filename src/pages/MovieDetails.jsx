@@ -11,13 +11,7 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
         navigate('/search')
     }
     
-    const handleFavourites = async () => {
-        // Check is Favourites is an Array
-        if (!Array.isArray(favourites)) {
-            toastr.error("Favourites list is not available!");
-            return;
-        }
-        
+    const handleFavourites = async () => {       
         // Checks for Validity/Existence of Fields
         if (!selectedMovie || !selectedMovie.imdbID) {
             toastr.error("Contains invalid movie data. Not added to Favourite Movies.");
@@ -31,8 +25,8 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
         }
         
         try{
-            const favourite = await create(selectedMovie)
-            setFavourites([...favourites, favourite])
+            await create(selectedMovie)
+            setFavourites([...favourites, selectedMovie])
             toastr.success('Movie added to Favourites!')
         }
         catch(error){
@@ -47,13 +41,17 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
             <h2 className="font-bold mb-2">{selectedMovie.Title} ({selectedMovie.Year})</h2>
             <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="border-2 rounded-lg mb-3" />
             <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleFavourites}>Add to Favourite Movies ⭐</button>
+            <p><strong>Rated:</strong> {selectedMovie.Rated}</p>
             <p><strong>Release Date:</strong> {selectedMovie.Released}</p>
             <p><strong>Runtime:</strong> {selectedMovie.Runtime}</p>
             <p><strong>Director(s):</strong> {selectedMovie.Director}</p>
             <p><strong>Writer(s):</strong> {selectedMovie.Writer}</p>
             <p><strong>Actors:</strong> {selectedMovie.Actors}</p>
             <p><strong>Genre(s):</strong> {selectedMovie.Genre}</p>
-            <p><strong>IMDb Rating:</strong> {selectedMovie.imdbRating} ⭐</p>
+            <p><strong>IMDb Rating:</strong> {selectedMovie.imdbRating} ⭐
+            <span className="ml-10"><strong>Metascore:</strong> {selectedMovie.Metascore} ⭐</span>
+            <span className="ml-10"><strong>Rotten Tomatoes:</strong> {selectedMovie.Ratings[1]?.Value || 'N/A'} ⭐</span>
+            </p>
             <p><strong>Plot:</strong> {selectedMovie.Plot}</p>
             <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleClick}>Back</button>
         </div>}
