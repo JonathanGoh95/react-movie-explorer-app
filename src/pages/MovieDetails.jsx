@@ -1,3 +1,5 @@
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 import { useNavigate } from "react-router"
 import { create } from "../services/movieService"
 
@@ -10,9 +12,32 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
     }
     
     const handleFavourites = async () => {
-        const favourite = await create(selectedMovie)
-        setFavourites([...favourites, favourite])
-        navigate('/search')
+        // Check is Favourites is an Array
+        if (!Array.isArray(favourites)) {
+            toastr.error("Favourites list is not available!");
+            return;
+        }
+        
+        // Checks for Validity/Existence of Fields
+        if (!selectedMovie || !selectedMovie.imdbID) {
+            toastr.error("Contains invalid movie data. Not added to Favourite Movies.");
+            return;
+        }
+        
+        // Check for Duplicates
+        if (favourites.some((movie) => movie.imdbID === selectedMovie.imdbID)) {
+            toastr.info("This movie is already in your Favourite Movies!");
+            return;
+        }
+        
+        try{
+            const favourite = await create(selectedMovie)
+            setFavourites([...favourites, favourite])
+            toastr.success('Movie added to Favourites!')
+        }
+        catch(error){
+            console.error("Failed to add to favourites:", error.message);
+        }
     }
 
     return(
