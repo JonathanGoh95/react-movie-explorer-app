@@ -4,15 +4,17 @@ import { create } from "../services/movieService"
 import { ToastContainer, toast } from "react-toastify";
 
 export default function MovieDetails({selectedMovie, setSelectedMovie, favourites, setFavourites,loading,selectedPage, query, movieYear}) {
-    const [timeToggle,setTimeToggle] = useState(true)
-    const [timeFormat,setTimeFormat] = useState('')
+    const [timeToggle,setTimeToggle] = useState(true)   // State for holding the time format of the movie runtime
+    const [timeFormat,setTimeFormat] = useState('')     // State that displays the movie runtime
     const navigate = useNavigate()
     
+    // Ensures that the state values are consistent when navigating between different components/pages
     const handleClick = () => {
         setSelectedMovie(null)
         navigate(`/search/?page=${selectedPage}&query=${query}&year=${movieYear}`)
     }
     
+    // Incorporates Toastify Notifications to update user on the status of adding a Favourite Movie
     const handleFavourites = async () => {       
         // Checks for Validity/Existence of Fields
         if (!selectedMovie || !selectedMovie.imdbID) {
@@ -20,12 +22,13 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
             return;
         }
         
-        // Check for Duplicates
+        // Checks for Duplicates
         if (favourites.some((movie) => movie.imdbID === selectedMovie.imdbID)) {
             toast.info("This movie is already in your Favourite Movies!")
             return;
         }
         
+        // Appends the movie to the Favourites State and the Airtable API asynchronously
         try{
             await create(selectedMovie)
             setFavourites([...favourites, selectedMovie])
@@ -36,6 +39,7 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
         }
     }
 
+    // Function for handling the conversion of time format 
     const handleTimeClick = () => {
         if (selectedMovie.Runtime){
             setTimeToggle(!timeToggle)
@@ -49,7 +53,7 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
         }
     }
 
-    // Loads in the movie's runtime value upon page load
+    // Loads in the movie's runtime value upon selectedMovie state change (i.e. Navigating into the MovieDetails Component)
     useEffect(() => {
         if (selectedMovie?.Runtime) {
             setTimeFormat(selectedMovie.Runtime);
@@ -85,6 +89,7 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
             <p><strong>Plot:</strong> {selectedMovie.Plot}</p>
             <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleClick}>Back</button>
         </div>}
+        {/* Toastify Container for Visual Customization and Appearance in Browser */}
         <ToastContainer
             position="top-right"
             autoClose={5000}

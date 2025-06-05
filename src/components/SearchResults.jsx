@@ -12,7 +12,7 @@ const numGroup = (array, size) => {
 export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear,loading,setLoading}) {
     const [pageIndex, setPageIndex] = useState(0);
     const navigate = useNavigate()
-    const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array, so as to optimize performance
+    const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array changes, so as to optimize performance
 
     const handleClick = async (imdbIDClick) => {
         setLoading(true)
@@ -29,15 +29,12 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
         }
     }
 
+    // Fetches API data whenever the page changes
     useEffect(() => {
         if (query) {
             fetchData(query, movieYear, selectedPage);
         }
     }, [selectedPage]);
-
-    useEffect(() => {
-    console.log("Movies state updated:", movies);
-}, [movies]);
 
     // Displays a loading banner while the API fetches the respective data
     if (loading) {
@@ -62,7 +59,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
             <h3 className="text-2xl flex justify-center mb-2 font-bold">Page Number(s):</h3>
             <div className="text-2xl flex justify-center gap-3 mb-4">
                 <button
-                    className="border-2 px-2 font-bold bg-white rounded-md"
+                    className="border-2 px-2 font-bold bg-white rounded-md cursor-pointer"
                     onClick={() => setPageIndex((i) => Math.max(i - 1, 0))}
                     disabled={pageIndex === 0}
                 >
@@ -72,7 +69,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
                     <button key={page} value={page} className='cursor-pointer' onClick={handlePageClick}>{page}</button>
                 ))}
                 <button
-                    className="border-2 px-2 font-bold bg-white rounded-md"
+                    className="border-2 px-2 font-bold bg-white rounded-md cursor-pointer"
                     onClick={() => setPageIndex((i) => Math.min(i + 1, pageGroup.length - 1))}
                     disabled={pageIndex === pageGroup.length - 1}
                 >
