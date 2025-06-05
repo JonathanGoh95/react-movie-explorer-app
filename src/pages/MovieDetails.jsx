@@ -3,14 +3,14 @@ import { useState,useEffect } from "react";
 import { create } from "../services/movieService"
 import { ToastContainer, toast } from "react-toastify";
 
-export default function MovieDetails({selectedMovie, setSelectedMovie, favourites, setFavourites,loading,selectedPage}) {
+export default function MovieDetails({selectedMovie, setSelectedMovie, favourites, setFavourites,loading,selectedPage, query, movieYear}) {
     const [timeToggle,setTimeToggle] = useState(true)
     const [timeFormat,setTimeFormat] = useState('')
     const navigate = useNavigate()
     
     const handleClick = () => {
         setSelectedMovie(null)
-        navigate(`/search/?page=${selectedPage}`)
+        navigate(`/search/?page=${selectedPage}&query=${query}&year=${movieYear}`)
     }
     
     const handleFavourites = async () => {       

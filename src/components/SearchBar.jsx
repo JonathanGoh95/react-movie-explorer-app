@@ -7,10 +7,10 @@ export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPa
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
-        fetchData(query,movieYear,selectedPage)     
+        await fetchData(query,movieYear,selectedPage)     
         setLoading(false)
         selectedPage !== 1 && setSelectedPage(1)    // Resets the results page back to the first page whenever a new search is conducted
-        navigate(`/search/?page=1`)                 // Resets the Page Count of the URL to 1 whenever a new search is conducted
+        navigate(`/search/?page=1&query=${query}&year=${movieYear}`)                 // Resets the Page Count of the URL to 1 whenever a new search is conducted
     }
 
     useEffect(()=>{     // Sets the Pages state, but only when the movies and setPages states changes
@@ -33,18 +33,6 @@ export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPa
             <input className='border-2 text-3xl rounded-lg w-1/7 text-center' type='number' placeholder='Filter by Release Year...' onChange={({target})=>setMovieYear(target.value)} disabled={query === ''}></input>
             <button className='border-2 text-3xl rounded-lg pt-2 pb-2 pl-5 pr-5 cursor-pointer' type="submit">Search</button>
         </form>
-        <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-        />
         </>
     )
 }

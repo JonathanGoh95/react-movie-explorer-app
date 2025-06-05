@@ -12,6 +12,7 @@ import MovieDetails from './pages/MovieDetails'
 export default function App() {
   const [movies,setMovies] = useState([])                   // State that stores the results of the movies searched
   const [selectedMovie,setSelectedMovie] = useState(null)   // State that stores the selected movie from the results page
+  const [query,setQuery] = useState('')                     // State for holding the query for movie title
   const [movieYear,setMovieYear] = useState('')             // State that adds an additional optional filter for movie release year
   const [selectedPage,setSelectedPage] = useState(1)        // State that determines the current page of the results
   const [favourites,setFavourites] = useState([])           // State that stores the user's favourite movies
@@ -51,6 +52,8 @@ export default function App() {
           movies={movies}
           fetchData={fetchData}
           fetchMovieDetails={fetchMovieDetails}
+          query={query}
+          setQuery={setQuery}
           movieYear={movieYear}
           setMovieYear={setMovieYear}
           selectedPage={selectedPage}
@@ -67,6 +70,8 @@ export default function App() {
           setFavourites={setFavourites}
           loading={loading}
           selectedPage={selectedPage}
+          query={query}
+          movieYear={movieYear}
           />}></Route>
         <Route path='/favourites' element={
           <FavouritesPage

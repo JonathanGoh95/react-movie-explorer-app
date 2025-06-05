@@ -14,9 +14,9 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
     const navigate = useNavigate()
     const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array, so as to optimize performance
 
-    const handleClick = (imdbIDClick) => {
+    const handleClick = async (imdbIDClick) => {
         setLoading(true)
-        fetchMovieDetails(imdbIDClick)
+        await fetchMovieDetails(imdbIDClick)
         setLoading(false)
         navigate(`/movie/${imdbIDClick}`)
     }
@@ -25,7 +25,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
         const pageNum = Number(target.value);   // Prevents any invalid/negative numbers to be set as the selectedPage state
         if (!isNaN(pageNum) && pageNum > 0) {
             setSelectedPage(pageNum);
-            navigate(`/search/?page=${pageNum}`)    // Directly stores the pageNum variable into the URL instead of state, as it requires time to update to the correct value
+            navigate(`/search/?page=${pageNum}&query=${query}&year=${movieYear}`);    // Directly stores the pageNum variable into the URL instead of state, as it requires time to update to the correct value
         }
     }
 

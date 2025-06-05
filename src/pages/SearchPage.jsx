@@ -1,10 +1,20 @@
 import SearchBar from "../components/SearchBar";
 import SearchResults from "../components/SearchResults";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 
-export default function SearchPage({movies,fetchData,fetchMovieDetails,movieYear,setMovieYear,selectedPage,setSelectedPage,loading,setLoading}) {
-    const [query,setQuery] = useState('')           // State for holding the query for movie title
+export default function SearchPage({movies,fetchData,fetchMovieDetails,query,setQuery,movieYear,setMovieYear,selectedPage,setSelectedPage,loading,setLoading}) {
     const [pages,setPages] = useState([])           // State for holding the number of pages
+    const [searchParams] = useSearchParams();
+
+    useEffect(() => {
+    const pageFromUrl = Number(searchParams.get("page")) || 1;
+    const queryFromUrl = searchParams.get("query") || "";
+    const yearFromUrl = searchParams.get("year") || "";
+    setSelectedPage(pageFromUrl);
+    setQuery(queryFromUrl);
+    setMovieYear(yearFromUrl);
+}, [searchParams, setSelectedPage, setQuery, setMovieYear]);
 
     return(
         <>
