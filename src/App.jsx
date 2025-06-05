@@ -40,7 +40,7 @@ export default function App() {
   
   return (
     <div className='text-center'>
-      <div className='bg-[url(./images/banner.jpg)] bg-cover text-white'><h1 className="text-6xl font-bold p-8">🎬 Movie Explorer 🎬</h1></div>
+      <div className='bg-[url(/images/banner.jpg)] bg-cover text-white'><h1 className="text-6xl font-bold p-8">🎬 Movie Explorer 🎬</h1></div>
       {/* Clears the Movies State whenever the 'Home' link is clicked */}
       <NavBar clearMovies={()=>setMovies([])}/>
       <Routes>

@@ -55,7 +55,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
                     onClick={() => setPageIndex((i) => Math.max(i - 1, 0))}
                     disabled={pageIndex === 0}
                 >
-                    Prev
+                    Prev 10
                 </button>
                 {pageGroup.length > 0 && pageGroup[pageIndex].map((page) => (
                     <button key={page} value={page} className='cursor-pointer' onClick={handlePageClick}>{page}</button>
@@ -65,7 +65,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
                     onClick={() => setPageIndex((i) => Math.min(i + 1, pageGroup.length - 1))}
                     disabled={pageIndex === pageGroup.length - 1}
                 >
-                    Next
+                    Next 10
                 </button>
             </div>
         </>
