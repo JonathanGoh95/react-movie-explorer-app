@@ -1,5 +1,5 @@
 // Constant Variables for Easy Reusability
-const BASE_URL = `http://www.omdbapi.com/?apikey=c7933753`;
+const BASE_URL = `https://www.omdbapi.com/?apikey=c7933753`;
 const AIRTABLE_BASE = `appiKbPo7d5P9pnCG`;
 const AIRTABLE_TABLE = `tblcMlwFSdnAcvIvt`;
 const AIRTABLE_API_KEY = `pathY8nl4S5cr40VQ.a7a82c062d2589a19174ef0ca73199fea3e5d2cfc3d08ba24b06d09792d57d23`;
