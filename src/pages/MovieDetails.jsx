@@ -1,9 +1,12 @@
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import { useNavigate } from "react-router"
+import { useState,useEffect } from "react";
 import { create } from "../services/movieService"
 
 export default function MovieDetails({selectedMovie, setSelectedMovie, favourites, setFavourites}) {
+    const [timeToggle,setTimeToggle] = useState(true)
+    const [timeFormat,setTimeFormat] = useState('')
     const navigate = useNavigate()
 
     const handleClick = () => {
@@ -34,6 +37,26 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
         }
     }
 
+    const handleTimeClick = () => {
+        if (selectedMovie.Runtime){
+            setTimeToggle(!timeToggle)
+            const runtimeMins = selectedMovie.Runtime.split(" ")[0]
+            const hr = Math.floor(Number(runtimeMins)/60)
+            const min = Number(runtimeMins)%60
+            timeToggle ?
+            setTimeFormat(hr === 0 ? `${min} mins` :
+            hr === 1 ? `${hr} hr ${min} mins` :
+            `${hr} hrs ${min} mins`) : setTimeFormat(selectedMovie.Runtime)
+        }
+    }
+
+    // Loads in the movie's runtime value upon page load
+    useEffect(() => {
+        if (selectedMovie?.Runtime) {
+            setTimeFormat(selectedMovie.Runtime);
+        }
+    }, [selectedMovie]);
+
     return(
         <div className="flex justify-center mt-5 text-3xl">
         {selectedMovie &&
@@ -43,7 +66,10 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
             <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleFavourites}>Add to Favourite Movies ⭐</button>
             <p><strong>Rated:</strong> {selectedMovie.Rated}</p>
             <p><strong>Release Date:</strong> {selectedMovie.Released}</p>
-            <p><strong>Runtime:</strong> {selectedMovie.Runtime}</p>
+            <div className="flex gap-5">
+                <p className="mt-2"><strong>Runtime:</strong> {timeFormat}</p>
+                <button className='text-2xl p-2 font-bold bg-white border-2 rounded-md cursor-pointer' onClick={handleTimeClick}>Convert Runtime Time Format</button>
+            </div>
             <p><strong>Director(s):</strong> {selectedMovie.Director}</p>
             <p><strong>Writer(s):</strong> {selectedMovie.Writer}</p>
             <p><strong>Actors:</strong> {selectedMovie.Actors}</p>

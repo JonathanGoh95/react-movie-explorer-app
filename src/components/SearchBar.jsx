@@ -29,7 +29,7 @@ export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPa
     return(
         <form className='flex gap-10 justify-center' onSubmit={handleSubmit}>
             <input className='border-2 text-3xl rounded-lg w-1/2 text-center' type='text' placeholder='Type the Movie Title here...' onChange={({target})=>setQuery(target.value)}></input>
-            <input className='border-2 text-3xl rounded-lg w-1/8 text-center' type='number' placeholder='Filter by Release Year...' onChange={({target})=>setMovieYear(target.value)} disabled={query === ''}></input>
+            <input className='border-2 text-3xl rounded-lg w-1/7 text-center' type='number' placeholder='Filter by Release Year...' onChange={({target})=>setMovieYear(target.value)} disabled={query === ''}></input>
             <button className='border-2 text-3xl rounded-lg pt-2 pb-2 pl-5 pr-5 cursor-pointer' type="submit">Search</button>
         </form>
     )
