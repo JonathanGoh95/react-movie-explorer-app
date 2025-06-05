@@ -11,7 +11,7 @@ export default function FavouriteMovies({favourites, setFavourites}) {
     <div className="flex flex-wrap justify-center p-10 text-3xl gap-2 w-vw">
         {favourites.length !== 0 &&
         (favourites.map((favourite) => (
-            <div key={favourite.imdbID} className="flex flex-col gap-5 items-center justify-start p-6 border-2 w-1/3 bg-black/15">
+            <div key={favourite.imdbID} className="flex flex-col gap-5 items-center justify-start p-6 border-2 w-9/20 bg-black/15">
                 <h2 className="font-bold mb-2">{favourite.Title} ({favourite.Year})</h2>
                 <img src={favourite.Poster} alt={favourite.Title} className="border-2 rounded-lg mb-3" />
                 <p><strong>Release Date:</strong> {favourite.Released}</p>
