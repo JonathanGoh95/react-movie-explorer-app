@@ -9,7 +9,7 @@ const numGroup = (array, size) => {
     return result;
 }
 
-export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear}) {
+export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear,loading}) {
     const [pageIndex, setPageIndex] = useState(0);
     const navigate = useNavigate()
     const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array, so as to optimize performance
@@ -32,6 +32,11 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
             fetchData(query, movieYear, selectedPage);
         }
     }, [selectedPage]);
+
+    // Displays a loading banner while the API fetches the respective data
+    if (loading) {
+        return <div className="text-center text-4xl p-8">Loading...</div>;
+    }
 
     return(
         <div>

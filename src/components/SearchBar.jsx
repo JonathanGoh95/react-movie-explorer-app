@@ -1,12 +1,14 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router";
 
-export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPages,selectedPage,setSelectedPage,query,setQuery}) {
+export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPages,selectedPage,setSelectedPage,query,setQuery,setLoading}) {
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        fetchData(query,movieYear,selectedPage)     
+        setLoading(true)
+        await fetchData(query,movieYear,selectedPage)     
+        setLoading(false)
         selectedPage !== 1 && setSelectedPage(1)    // Resets the results page back to the first page whenever a new search is conducted
         navigate(`/search/?page=1`)                 // Resets the Page Count of the URL to 1 whenever a new search is conducted
     }
@@ -27,7 +29,7 @@ export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPa
     return(
         <form className='flex gap-10 justify-center' onSubmit={handleSubmit}>
             <input className='border-2 text-3xl rounded-lg w-1/2 text-center' type='text' placeholder='Type the Movie Title here...' onChange={({target})=>setQuery(target.value)}></input>
-            <input className='border-2 text-3xl rounded-lg w-1/8 text-center' type='number' placeholder='Filter by Release Year...' onChange={({target})=>setMovieYear(target.value)}></input>
+            <input className='border-2 text-3xl rounded-lg w-1/8 text-center' type='number' placeholder='Filter by Release Year...' onChange={({target})=>setMovieYear(target.value)} disabled={query === ''}></input>
             <button className='border-2 text-3xl rounded-lg pt-2 pb-2 pl-5 pr-5 cursor-pointer' type="submit">Search</button>
         </form>
     )
