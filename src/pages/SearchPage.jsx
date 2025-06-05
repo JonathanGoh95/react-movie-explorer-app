@@ -2,14 +2,13 @@ import SearchBar from "../components/SearchBar";
 import SearchResults from "../components/SearchResults";
 import { useState } from "react";
 
-export default function SearchPage({movies,fetchData,fetchMovieDetails,movieYear,setMovieYear,selectedPage,setSelectedPage}) {
+export default function SearchPage({movies,fetchData,fetchMovieDetails,movieYear,setMovieYear,selectedPage,setSelectedPage,loading,setLoading}) {
     const [query,setQuery] = useState('')           // State for holding the query for movie title
     const [pages,setPages] = useState([])           // State for holding the number of pages
-    const [loading,setLoading] = useState(false)    // State for the page loading while the API fetches data
 
     return(
         <>
-            <h1 className='text-4xl p-5 font-bold'>Search for a Movie (Specify the Movie Release Year for better accuracy)</h1>
+            <h1 className='text-4xl p-5 font-bold'>Search for a Movie (Movie Release Year can only be specified after a Movie Title query is given)</h1>
             <SearchBar
                 movies={movies}
                 fetchData={fetchData}
@@ -30,7 +29,8 @@ export default function SearchPage({movies,fetchData,fetchMovieDetails,movieYear
                 fetchData={fetchData}
                 query={query}
                 movieYear={movieYear}
-                loading={loading}/>
+                loading={loading}
+                setLoading={setLoading}/>
         </>
     )
 }

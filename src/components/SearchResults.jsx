@@ -9,13 +9,15 @@ const numGroup = (array, size) => {
     return result;
 }
 
-export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear,loading}) {
+export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear,loading,setLoading}) {
     const [pageIndex, setPageIndex] = useState(0);
     const navigate = useNavigate()
     const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array, so as to optimize performance
 
     const handleClick = (imdbIDClick) => {
+        setLoading(true)
         fetchMovieDetails(imdbIDClick)
+        setLoading(false)
         navigate(`/movie/${imdbIDClick}`)
     }
 
@@ -23,8 +25,8 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
         const pageNum = Number(target.value);   // Prevents any invalid/negative numbers to be set as the selectedPage state
         if (!isNaN(pageNum) && pageNum > 0) {
             setSelectedPage(pageNum);
+            navigate(`/search/?page=${pageNum}`)    // Directly stores the pageNum variable into the URL instead of state, as it requires time to update to the correct value
         }
-        navigate(`/search/?page=${pageNum}`)    // Directly stores the pageNum variable into the URL instead of state, as it requires time to update to the correct value
     }
 
     useEffect(() => {
@@ -32,6 +34,10 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
             fetchData(query, movieYear, selectedPage);
         }
     }, [selectedPage]);
+
+    useEffect(() => {
+    console.log("Movies state updated:", movies);
+}, [movies]);
 
     // Displays a loading banner while the API fetches the respective data
     if (loading) {

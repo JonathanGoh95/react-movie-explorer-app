@@ -1,36 +1,35 @@
-import toastr from "toastr";
-import "toastr/build/toastr.min.css";
 import { useNavigate } from "react-router"
 import { useState,useEffect } from "react";
 import { create } from "../services/movieService"
+import { ToastContainer, toast } from "react-toastify";
 
-export default function MovieDetails({selectedMovie, setSelectedMovie, favourites, setFavourites}) {
+export default function MovieDetails({selectedMovie, setSelectedMovie, favourites, setFavourites,loading,selectedPage}) {
     const [timeToggle,setTimeToggle] = useState(true)
     const [timeFormat,setTimeFormat] = useState('')
     const navigate = useNavigate()
-
+    
     const handleClick = () => {
         setSelectedMovie(null)
-        navigate('/search')
+        navigate(`/search/?page=${selectedPage}`)
     }
     
     const handleFavourites = async () => {       
         // Checks for Validity/Existence of Fields
         if (!selectedMovie || !selectedMovie.imdbID) {
-            toastr.error("Contains invalid movie data. Not added to Favourite Movies.");
+            toast.error("Contains invalid movie data. Not added to Favourite Movies.")
             return;
         }
         
         // Check for Duplicates
         if (favourites.some((movie) => movie.imdbID === selectedMovie.imdbID)) {
-            toastr.info("This movie is already in your Favourite Movies!");
+            toast.info("This movie is already in your Favourite Movies!")
             return;
         }
         
         try{
             await create(selectedMovie)
             setFavourites([...favourites, selectedMovie])
-            toastr.success('Movie added to Favourites!')
+            toast.success("Movie added to Favourites!")
         }
         catch(error){
             console.error("Failed to add to favourites:", error.message);
@@ -57,6 +56,11 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
         }
     }, [selectedMovie]);
 
+    // Displays a loading banner while the API fetches the respective data
+    if (loading) {
+        return <div className="text-center text-4xl p-8">Loading...</div>;
+    }
+
     return(
         <div className="flex justify-center mt-5 text-3xl">
         {selectedMovie &&
@@ -81,6 +85,18 @@ export default function MovieDetails({selectedMovie, setSelectedMovie, favourite
             <p><strong>Plot:</strong> {selectedMovie.Plot}</p>
             <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleClick}>Back</button>
         </div>}
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+        />
         </div>
     )
 }

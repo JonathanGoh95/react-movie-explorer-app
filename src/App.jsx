@@ -15,10 +15,11 @@ export default function App() {
   const [movieYear,setMovieYear] = useState('')             // State that adds an additional optional filter for movie release year
   const [selectedPage,setSelectedPage] = useState(1)        // State that determines the current page of the results
   const [favourites,setFavourites] = useState([])           // State that stores the user's favourite movies
-
+  const [loading,setLoading] = useState(false)    // State for the page loading while the API fetches data
 
   const fetchData = async (query,year,selectedPage) => {             
     const data = await movieService.movies(query,year,selectedPage)
+    console.log("Fetched data:", data);
     setMovies(data || [])
   }
 
@@ -54,10 +55,24 @@ export default function App() {
           setMovieYear={setMovieYear}
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
+          loading={loading}
+          setLoading={setLoading}
         />}>
         </Route>
-        <Route path='/movie/:imdbID' element={<MovieDetails selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} favourites={favourites} setFavourites={setFavourites}/>}></Route>
-        <Route path='/favourites' element={<FavouritesPage favourites={favourites} setFavourites={setFavourites}/>}></Route>
+        <Route path='/movie/:imdbID' element={
+          <MovieDetails
+          selectedMovie={selectedMovie}
+          setSelectedMovie={setSelectedMovie}
+          favourites={favourites}
+          setFavourites={setFavourites}
+          loading={loading}
+          selectedPage={selectedPage}
+          />}></Route>
+        <Route path='/favourites' element={
+          <FavouritesPage
+          favourites={favourites}
+          setFavourites={setFavourites}
+          />}></Route>
       </Routes>
     </div>
   )
