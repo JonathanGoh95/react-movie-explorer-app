@@ -8,7 +8,7 @@ export default function NavBar({clearMovies,query,movieYear,selectedPage}) {
         params.append("page", selectedPage || 1);
 
     return (
-    <nav className='border-b-2 border-black bg-black/30'>
+    <nav className='border-b-2 border-black bg-black/30 font-bold'>
         <ul className='text-3xl flex gap-20 justify-center p-5'>
             <li><NavLink to="/" onClick={clearMovies}>Home</NavLink></li>
             <li><NavLink to={`/search?${params.toString()}`}>Search For Movies</NavLink></li>
