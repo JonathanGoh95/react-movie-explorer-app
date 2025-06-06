@@ -3,7 +3,7 @@ import SearchResults from "../components/SearchResults";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 
-export default function SearchPage({movies,fetchData,fetchMovieDetails,query,setQuery,movieYear,setMovieYear,selectedPage,setSelectedPage,loading,setLoading}) {
+export default function SearchPage({movies,fetchData,fetchMovieDetails,query,setQuery,movieYear,setMovieYear,selectedPage,setSelectedPage,loading,setLoading,favourites,setFavourites}) {
     const [pages,setPages] = useState([])           // State for holding the number of pages
     const [searchParams] = useSearchParams();
 
@@ -41,7 +41,9 @@ export default function SearchPage({movies,fetchData,fetchMovieDetails,query,set
             query={query}
             movieYear={movieYear}
             loading={loading}
-            setLoading={setLoading}/>
+            setLoading={setLoading}
+            favourites={favourites}
+            setFavourites={setFavourites}/>
         </>
     )
 }

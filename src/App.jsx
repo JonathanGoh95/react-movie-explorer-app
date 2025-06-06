@@ -61,6 +61,8 @@ export default function App() {
           setSelectedPage={setSelectedPage}
           loading={loading}
           setLoading={setLoading}
+          favourites={favourites}
+          setFavourites={setFavourites}
         />}>
         </Route>
         <Route path='/movie/:imdbID' element={
