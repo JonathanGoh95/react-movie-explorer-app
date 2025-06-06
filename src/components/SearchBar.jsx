@@ -1,11 +1,20 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPages,selectedPage,setSelectedPage,query,setQuery,setLoading}) {
+    const currentYear = Number(new Date().getFullYear());
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if(movieYear !== '' && movieYear > currentYear){
+            toast.error(`Release Year should be before the current year: ${currentYear}`)
+            return
+        } else if(movieYear !== '' && movieYear < 1000){
+            toast.error(`Release Year should be 4 digits`)
+            return
+        }
         setLoading(true)                                                // Logic for handling the Loading banner while fetching data from API
         await fetchData(query,movieYear,selectedPage)     
         setLoading(false)
@@ -28,10 +37,25 @@ export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPa
     }, [movies, setPages])
 
     return(
+        <>
         <form className='flex gap-10 justify-center' onSubmit={handleSubmit}>
             <input className='border-2 text-3xl rounded-lg w-1/2 text-center' type='text' placeholder='Type the Movie Title here...' onChange={({target})=>setQuery(target.value)}></input>
             <input className='border-2 text-3xl rounded-lg w-1/7 text-center' type='number' placeholder='Filter by Release Year...' onChange={({target})=>setMovieYear(target.value)} disabled={query === ''}></input>
             <button className='border-2 text-3xl rounded-lg pt-2 pb-2 pl-5 pr-5 cursor-pointer' type="submit">Search</button>
         </form>
+        {/* Toastify Container for Visual Customization and Appearance in Browser */}
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+        />
+        </>
     )
 }
