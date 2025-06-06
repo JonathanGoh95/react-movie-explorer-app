@@ -28,15 +28,27 @@
 
 ## Project Wireframes
 
-![Home Page](./images/HomePage.JPG)
+![Home Page](/images/HomePage.JPG)
 
-![Search Page Before](./images/SearchPage_Before.JPG)
+![Search Page Before](/images/SearchPage_Before.JPG)
 
-![Search Page After](./images/SearchPage_After.JPG)
+![Search Page After](/images/SearchPage_After.JPG)
 
-![Movie Details](./images/MovieDetails.JPG)
+![Movie Details](/images/MovieDetails.JPG)
 
-![Favourite Movies](./images/FavouriteMovies.JPG)
+![Favourite Movies](/images/FavouriteMovies.JPG)
+
+## App Screengrabs
+
+![Home Page](/images/HomePage_Screengrab.JPG)
+
+![Search Page Before](/images/SearchPage_Before_Screengrab.JPG)
+
+![Search Page After](/images/SearchPage_After_Screengrab.JPG)
+
+![Movie Details](/images/MovieDetails_Screengrab.JPG)
+
+![Favourite Movies](/images/FavouriteMovies_Screengrab.JPG)
 
 ## References
 
