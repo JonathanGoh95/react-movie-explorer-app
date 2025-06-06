@@ -2,7 +2,7 @@
 const BASE_URL = `https://www.omdbapi.com/?apikey=c7933753`;
 const AIRTABLE_BASE = `appiKbPo7d5P9pnCG`;
 const AIRTABLE_TABLE = `tblcMlwFSdnAcvIvt`;
-const AIRTABLE_API_KEY = `pathY8nl4S5cr40VQ.a7a82c062d2589a19174ef0ca73199fea3e5d2cfc3d08ba24b06d09792d57d23`;
+const AIRTABLE_API_KEY = `pathY8nl4S5cr40VQ.46d1f67d5b6b2a73970b7298c7b6f630e4e5812834f6db43bd3cd6ecda08b71d`;
 const AIRTABLE_URL = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
 
 // Authorization Data for Airtable
@@ -54,7 +54,6 @@ async function favourites() {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-
     const json = await response.json();
     return json;
   } catch (error) {
@@ -70,17 +69,20 @@ async function create(movie) {
       headers: headersData,
       body: JSON.stringify({
         fields: {
-          Title: movie.Title,
-          Released: movie.Released,
-          Runtime: movie.Runtime,
-          Director: movie.Director,
-          Writer: movie.Writer,
-          Actors: movie.Actors,
-          Genre: movie.Genre,
-          imdbRating: movie.imdbRating,
-          Poster: movie.Poster,
-          Plot: movie.Plot,
-          imdbID: movie.imdbID,
+          Title: movie.Title || "",
+          Released: movie.Released || "",
+          Year: movie.Year || "",
+          Runtime: movie.Runtime || "",
+          Director: movie.Director || "",
+          Writer: movie.Writer || "",
+          Actors: movie.Actors || "",
+          Genre: movie.Genre || "",
+          imdbRating: movie.imdbRating || "",
+          Metascore: movie.Metascore || "",
+          RottenTomatoes: movie.Ratings[1]?.Value || "N/A",
+          Poster: movie.Poster || "",
+          Plot: movie.Plot || "",
+          imdbID: movie.imdbID || "",
         },
       }),
     });
@@ -108,7 +110,7 @@ async function destroy(imdbID) {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    const recordId = fetchData.records[0]?.id; // Gets the record ID
+    const recordId = json.records[0]?.id; // Gets the record ID
     if (!recordId) {
       throw new Error("Record not found");
     }
