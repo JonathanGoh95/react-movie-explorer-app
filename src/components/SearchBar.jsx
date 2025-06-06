@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPages,selectedPage,setSelectedPage,query,setQuery,setLoading}) {
+export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPages,selectedPage,setSelectedPage,query,setQuery,setLoading,setPageIndex}) {
     const currentYear = Number(new Date().getFullYear());
     const navigate = useNavigate()
 
@@ -19,6 +19,7 @@ export default function SearchBar({movies,fetchData,movieYear,setMovieYear,setPa
         await fetchData(query,movieYear,selectedPage)     
         setLoading(false)
         selectedPage !== 1 && setSelectedPage(1)                        // Resets the results page back to the first page whenever a new search is conducted
+        setPageIndex(0)                                                 // Resets the index to the first group of pages whenever a new search is conducted
         navigate(`/search/?page=1&query=${query}&year=${movieYear}`)    // Resets the Page Count of the URL to 1 whenever a new search is conducted
     }
     

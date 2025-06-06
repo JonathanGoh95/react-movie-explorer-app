@@ -5,9 +5,9 @@ import { useSearchParams } from "react-router";
 
 export default function SearchPage({movies,fetchData,fetchMovieDetails,query,setQuery,movieYear,setMovieYear,selectedPage,setSelectedPage,loading,setLoading,favourites,setFavourites}) {
     const [pages,setPages] = useState([])           // State for holding the number of pages
-    const [searchParams] = useSearchParams();
+    const [pageIndex, setPageIndex] = useState(0);  // State for holding the index for the group of page numbers
+    const [searchParams] = useSearchParams();       // Use of Search Params hook to get URL query parameters and store them in the respective states to maintain state integrity throughout
 
-    // Use of Search Params hook to get URL query parameters and store them in the respective states to maintain state integrity throughout
     useEffect(() => {
         const pageFromUrl = Number(searchParams.get("page")) || 1;
         const queryFromUrl = searchParams.get("query") || "";
@@ -30,7 +30,8 @@ export default function SearchPage({movies,fetchData,fetchMovieDetails,query,set
             setSelectedPage={setSelectedPage}
             query={query}
             setQuery={setQuery}
-            setLoading={setLoading}/>
+            setLoading={setLoading}
+            setPageIndex={setPageIndex}/>
         <SearchResults
             movies={movies}
             fetchMovieDetails={fetchMovieDetails}
@@ -43,7 +44,9 @@ export default function SearchPage({movies,fetchData,fetchMovieDetails,query,set
             loading={loading}
             setLoading={setLoading}
             favourites={favourites}
-            setFavourites={setFavourites}/>
+            setFavourites={setFavourites}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}/>
         </>
     )
 }

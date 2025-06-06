@@ -11,8 +11,7 @@ const numGroup = (array, size) => {
     return result;
 }
 
-export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear,loading,setLoading,favourites,setFavourites}) {
-    const [pageIndex, setPageIndex] = useState(0);
+export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear,loading,setLoading,favourites,setFavourites,pageIndex,setPageIndex}) {
     const navigate = useNavigate()
     const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array changes, so as to optimize performance
 
@@ -59,9 +58,12 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
 
     // Fetches API data whenever the page changes
     useEffect(() => {
+    const fetchPage = async () => {
         if (query) {
-            fetchData(query, movieYear, selectedPage);
-        }
+            await fetchData(query, movieYear, selectedPage);
+            setLoading(false); // Set loading to false after data is fetched
+        }}
+    fetchPage()
     }, [selectedPage]);
 
     // Displays a loading banner while the API fetches the respective data
