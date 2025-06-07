@@ -6,7 +6,7 @@
 
 - Built with React using Components, Props, Routes, etc.
 - Calls a public API using Fetch.
-- Includes at least 1 C (Create), 1 U (Update) or 1 D (Delete) functionality using Airtable.
+- Includes at least 1 C (Create), 1 R (Read) or 1 D (Delete) functionality using Airtable.
 - Deployment of App online using Netlify
 
 ## Timeframe
