@@ -10,9 +10,9 @@ export default function NavBar({clearMovies,query,movieYear,selectedPage}) {
     return (
     <nav className='border-b-2 border-black bg-black/30 font-bold'>
         <ul className='text-3xl flex gap-20 justify-center p-5'>
-            <li><NavLink to="/" onClick={clearMovies}>Home</NavLink></li>
-            <li><NavLink to={`/search?${params.toString()}`}>Search For Movies</NavLink></li>
-            <li><NavLink to="/favourites">My Favourite Movies</NavLink></li>
+            <li><NavLink to="/" onClick={clearMovies} className='hover:text-white'>Home</NavLink></li>
+            <li><NavLink to={`/search?${params.toString()}`} className='hover:text-white'>Search For Movies</NavLink></li>
+            <li><NavLink to="/favourites" className='hover:text-white'>My Favourite Movies</NavLink></li>
         </ul>
     </nav>
     )
