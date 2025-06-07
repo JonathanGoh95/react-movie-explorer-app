@@ -46,7 +46,12 @@ export default function App() {
       <div className='bg-[url(/images/banner.jpg)] bg-cover text-white'><h1 className="text-6xl font-bold p-8">🎬 Movie Explorer 🎬</h1></div>
       {/* Clears the Movies State whenever the 'Home' link is clicked */}
       <NavBar
-        clearMovies={()=>setMovies([])}
+        clearMovies={() => {
+          setMovies([]);
+          setQuery('');
+          setMovieYear('');
+          setSelectedPage(1);
+        }}
         query={query}
         movieYear={movieYear}
         selectedPage={selectedPage}/>
