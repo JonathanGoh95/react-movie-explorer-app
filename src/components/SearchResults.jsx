@@ -25,6 +25,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
     const handlePageClick = ({target}) => {
         const pageNum = Number(target.value);   // Prevents any invalid/negative numbers to be set as the selectedPage state
         if (!isNaN(pageNum) && pageNum > 0) {
+            setLoading(true);
             setSelectedPage(pageNum);
             navigate(`/search/?page=${pageNum}&query=${query}&year=${movieYear}`);    // Directly stores the pageNum variable into the URL instead of state, as it requires time to update to the correct value
         }
@@ -102,7 +103,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
                     Prev 10
                 </button>
                 {pageGroup.length > 0 && pageGroup[pageIndex].map((page) => (
-                    <button key={page} value={page} className='cursor-pointer' onClick={handlePageClick}>{page}</button>
+                    <button key={page} value={page} className='cursor-pointer' onClick={handlePageClick} disabled={page === selectedPage} style={page === selectedPage ? { opacity: 0.5, fontWeight: 'bold' } : {}}>{page}</button>
                 ))}
                 <button
                     className="border-2 px-2 font-bold bg-white rounded-md cursor-pointer"
