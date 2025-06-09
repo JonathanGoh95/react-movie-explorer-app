@@ -53,7 +53,7 @@ export default function MovieDetails({selectedMovie,setSelectedMovie,favourites,
         }
     }
 
-    // Loads in the movie's runtime value upon selectedMovie state change (i.e. Navigating into the MovieDetails Component)
+    // Loads in the movie's runtime value upon selectedMovie state change (i.e. When navigating into the Movie Details Page)
     useEffect(() => {
         if (selectedMovie?.Runtime) {
             setTimeFormat(selectedMovie.Runtime);
@@ -83,8 +83,8 @@ export default function MovieDetails({selectedMovie,setSelectedMovie,favourites,
             <p><strong>Actors:</strong> {selectedMovie.Actors}</p>
             <p><strong>Genre(s):</strong> {selectedMovie.Genre}</p>
             <p><strong>IMDb Rating:</strong> {selectedMovie.imdbRating} ⭐
-            <span className="ml-10"><strong>Metascore:</strong> {selectedMovie.Metascore} ⭐</span>
-            <span className="ml-10"><strong>Rotten Tomatoes:</strong> {selectedMovie.Ratings[1]?.Value || 'N/A'} ⭐</span>
+                <span className="ml-10"><strong>Metascore:</strong> {selectedMovie.Metascore} ⭐</span>
+                <span className="ml-10"><strong>Rotten Tomatoes:</strong> {selectedMovie.Ratings[1]?.Value || 'N/A'} ⭐</span>
             </p>
             <p><strong>Plot:</strong> {selectedMovie.Plot}</p>
             <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleClick}>Back</button>

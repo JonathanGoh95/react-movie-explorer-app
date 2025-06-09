@@ -3,11 +3,12 @@ import SearchResults from "../components/SearchResults";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 
-export default function SearchPage({movies,fetchData,fetchMovieDetails,query,setQuery,movieYear,setMovieYear,selectedPage,setSelectedPage,loading,setLoading,favourites,setFavourites}) {
+export default function SearchPage({movies, fetchData, fetchMovieDetails, query, setQuery, movieYear, setMovieYear, selectedPage, setSelectedPage, loading, setLoading, favourites, setFavourites}) {
     const [pages,setPages] = useState([])           // State for holding the number of pages
     const [pageIndex, setPageIndex] = useState(0);  // State for holding the index for the group of page numbers
     const [searchParams] = useSearchParams();       // Use of Search Params hook to get URL query parameters and store them in the respective states to maintain state integrity throughout
 
+    // Keeps URL consistent with the query parameters whenever they update
     useEffect(() => {
         const pageFromUrl = Number(searchParams.get("page")) || 1;
         const queryFromUrl = searchParams.get("query") || "";

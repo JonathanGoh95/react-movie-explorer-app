@@ -1,7 +1,7 @@
 import { NavLink } from "react-router"
 
 export default function NavBar({clearMovies,query,movieYear,selectedPage}) {
-        // Create the URL with the latest query state values
+        // Create the URL with the current query state values
         const params = new URLSearchParams();
         if (query) params.append("query", query);
         if (movieYear) params.append("year", movieYear);

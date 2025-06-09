@@ -11,10 +11,11 @@ const numGroup = (array, size) => {
     return result;
 }
 
-export default function SearchResults({movies,fetchMovieDetails,pages,selectedPage,setSelectedPage,fetchData,query,movieYear,loading,setLoading,favourites,setFavourites,pageIndex,setPageIndex}) {
+export default function SearchResults({movies, fetchMovieDetails, pages, selectedPage, setSelectedPage, fetchData, query, movieYear, loading, setLoading, favourites, setFavourites, pageIndex, setPageIndex}) {
     const navigate = useNavigate()
     const pageGroup = useMemo(() => numGroup(pages, 10), [pages]);     // Only calls the function whenever the pages state array changes, so as to optimize performance
 
+    // Navigates to the Movie Details Page while showing the Loading Banner
     const handleClick = async (imdbIDClick) => {
         setLoading(true)
         await fetchMovieDetails(imdbIDClick)
@@ -22,9 +23,10 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
         navigate(`/movie/${imdbIDClick}`)
     }
 
+    // Fetches the respective data of the page number clicked
     const handlePageClick = ({target}) => {
-        const pageNum = Number(target.value);   // Prevents any invalid/negative numbers to be set as the selectedPage state
-        if (!isNaN(pageNum) && pageNum > 0) {
+        const pageNum = Number(target.value);   
+        if (!isNaN(pageNum) && pageNum > 0) {   // Prevents any invalid/negative numbers to be set as the selectedPage state
             setLoading(true);
             setSelectedPage(pageNum);
             navigate(`/search/?page=${pageNum}&query=${query}&year=${movieYear}`);    // Directly stores the pageNum variable into the URL instead of state, as it requires time to update to the correct value
@@ -57,7 +59,7 @@ export default function SearchResults({movies,fetchMovieDetails,pages,selectedPa
         }
     }
 
-    // Fetches API data whenever the page changes
+    // Fetches API data asynchronously whenever the page changes
     useEffect(() => {
     const fetchPage = async () => {
         if (query) {

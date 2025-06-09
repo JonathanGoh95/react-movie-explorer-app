@@ -2,7 +2,8 @@ import { destroy } from "../services/movieService"
 import { useState,useEffect } from "react"
 
 export default function FavouriteMovies({favourites, setFavourites}) {
-    const [timeFormats,setTimeFormats] = useState('')     // State that displays the movie runtime
+    // State that displays the movies' runtime
+    const [timeFormats,setTimeFormats] = useState('')     
     // States for sorting the Favourites array
     const [sortField, setSortField] = useState("Title");
     const [sortOrder, setSortOrder] = useState("asc");
@@ -74,6 +75,7 @@ export default function FavouriteMovies({favourites, setFavourites}) {
                 </select>
             </div>
         </div>)}
+        
         <div className="flex flex-wrap justify-center p-10 text-3xl gap-2 w-vw">
             {sortedFavourites.length !== 0 &&
             (sortedFavourites.map((favourite) => (

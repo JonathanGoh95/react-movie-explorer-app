@@ -1,13 +1,12 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router'
 import NavBar from './components/NavBar'
 import SearchPage from './pages/SearchPage'
 import HomePage from './pages/HomePage'
 import FavouritesPage from './pages/FavouritesPage'
-
+import MovieDetails from './pages/MovieDetails'
 import * as movieService from './services/movieService'
 import './App.css'
-import MovieDetails from './pages/MovieDetails'
 
 export default function App() {
   const [movies,setMovies] = useState([])                   // State that stores the results of the movies searched
@@ -18,7 +17,7 @@ export default function App() {
   const [favourites,setFavourites] = useState([])           // State that stores the user's favourite movies
   const [loading,setLoading] = useState(false)              // State for the page loading while the API fetches data (For SearchResults and MovieDetails components)
 
-  // Fetches the respective API based on the Movie Title Query, Optional Movie Year Released Query and shall be defaulted to the first page upon searchingreact 
+  // Fetches the respective API based on the Movie Title Query, Optional Movie Year Released Query and shall be defaulted to the first page upon searching
   const fetchData = async (query,year,selectedPage) => {             
     const data = await movieService.movies(query,year,selectedPage)
     console.log("Fetched data:", data);
@@ -31,7 +30,7 @@ export default function App() {
     setSelectedMovie(details)
   }
 
-  // Fetches the Favourites Data from Airtable upon page load
+  // Fetches the Favourites Data from Airtable upon page load and sets it in the local Favourites state
   useEffect(()=>{
     const getFavourites = async () => {
         const data = await movieService.favourites()
@@ -84,14 +83,15 @@ export default function App() {
           selectedPage={selectedPage}
           query={query}
           movieYear={movieYear}
-          />}></Route>
+          />}>
+        </Route>
         <Route path='/favourites' element={
           <FavouritesPage
           favourites={favourites}
           setFavourites={setFavourites}
-          />}></Route>
+          />}>
+        </Route>
       </Routes>
     </div>
   )
-
 }
