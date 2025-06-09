@@ -39,6 +39,10 @@
 
 ![Favourite Movies](./images/FavouriteMovies.JPG)
 
+## Tree Structure of Pages/Components
+
+![Tree Structure](./images/TreeStructure.jpg)
+
 ## App Screengrabs
 
 ![Home Page App Screengrab](./images/HomePage_Screengrab.jpg)
