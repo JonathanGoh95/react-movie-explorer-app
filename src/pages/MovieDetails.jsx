@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router"
 import { useState,useEffect } from "react";
 import { create } from "../services/movieService"
+import { Link } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function MovieDetails({selectedMovie,setSelectedMovie,favourites,setFavourites,loading,selectedPage,query,movieYear}) {
@@ -71,7 +72,10 @@ export default function MovieDetails({selectedMovie,setSelectedMovie,favourites,
         <div className="flex flex-col gap-5 items-center justify-center p-6 border-2 w-1/2 bg-black/15">
             <h2 className="font-bold mb-2">{selectedMovie.Title} ({selectedMovie.Year})</h2>
             <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="border-2 rounded-lg mb-3" />
-            <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleFavourites}>Add to Favourite Movies ⭐</button>
+            <div className="flex gap-5">
+                <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleFavourites}>Add to Favourite Movies ⭐</button>
+                <Link to={`https://www.youtube.com/results?search_query=${(selectedMovie.Title).split(' ').join('+')}+${selectedMovie.Year}+Trailer`} className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-2 pr-2 cursor-pointer' target="_blank">Watch Trailer on YouTube ▶️</Link>
+            </div>
             <p><strong>Rated:</strong> {selectedMovie.Rated}</p>
             <p><strong>Release Date:</strong> {selectedMovie.Released}</p>
             <div className="flex gap-5">

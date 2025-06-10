@@ -94,7 +94,6 @@ export default function SearchResults({movies, fetchMovieDetails, pages, selecte
                     <Link to={`https://www.youtube.com/results?search_query=${(movie.Title).split(' ').join('+')}+${movie.Year}+Trailer`} className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-2 pr-2 cursor-pointer' target="_blank" onClick={(e) => {
                         e.stopPropagation(); // Prevents triggering of the parent div's onClick
                     }}>Watch Trailer on YouTube ▶️</Link>
-
                 </div>
             </div>
             ))}

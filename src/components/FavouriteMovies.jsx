@@ -1,5 +1,6 @@
 import { destroy } from "../services/movieService"
 import { useState,useEffect } from "react"
+import { Link } from "react-router";
 
 export default function FavouriteMovies({favourites, setFavourites}) {
     // State that displays the movies' runtime
@@ -82,6 +83,7 @@ export default function FavouriteMovies({favourites, setFavourites}) {
                 <div key={favourite.imdbID} className="flex flex-col gap-5 items-center justify-start p-6 border-2 w-9/20 bg-black/15">
                     <h2 className="font-bold mb-2">{favourite.Title} ({favourite.Year})</h2>
                     <img src={favourite.Poster} alt={favourite.Title} className="border-2 rounded-lg mb-3" />
+                    <Link to={`https://www.youtube.com/results?search_query=${(favourite.Title).split(' ').join('+')}+${favourite.Year}+Trailer`} className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-2 pr-2 cursor-pointer' target="_blank">Watch Trailer on YouTube ▶️</Link>
                     <p><strong>Release Date:</strong> {favourite.Released}</p>
                     <div className="flex gap-5">
                     <p className="mt-2"><strong>Runtime:</strong> {timeFormats[favourite.imdbID] || favourite.Runtime}</p>
