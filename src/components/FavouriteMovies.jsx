@@ -76,7 +76,7 @@ export default function FavouriteMovies({favourites, setFavourites}) {
             </div>
         </div>)}
         
-        <div className="flex flex-wrap justify-center p-10 text-3xl gap-2 w-vw">
+        <div className="flex flex-wrap justify-center p-10 text-3xl gap-2 w-full">
             {sortedFavourites.length !== 0 &&
             (sortedFavourites.map((favourite) => (
                 <div key={favourite.imdbID} className="flex flex-col gap-5 items-center justify-start p-6 border-2 w-9/20 bg-black/15">

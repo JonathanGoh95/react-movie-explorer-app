@@ -1,6 +1,7 @@
-import {useState, useMemo, useEffect} from "react"
+import { useMemo, useEffect } from "react"
 import { useNavigate } from "react-router";
 import { create, details } from "../services/movieService"
+import { Link } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 
 const numGroup = (array, size) => {
@@ -87,9 +88,13 @@ export default function SearchResults({movies, fetchMovieDetails, pages, selecte
                     <p>{movie.Year}</p>
                     <p>Type: {String(movie.Type).charAt(0).toUpperCase() + String(movie.Type).slice(1)}</p>
                     <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 w-3/4 cursor-pointer' onClick={(e) => {
-                        e.stopPropagation(); // Prevents triggering the parent div's onClick
+                        e.stopPropagation(); // Prevents triggering of the parent div's onClick
                         handleFavourites(movie);
                     }}>Add to Favourite Movies ⭐</button>
+                    <Link to={`https://www.youtube.com/results?search_query=${(movie.Title).split(' ').join('+')}+${movie.Year}+Trailer`} className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-2 pr-2 cursor-pointer' target="_blank" onClick={(e) => {
+                        e.stopPropagation(); // Prevents triggering of the parent div's onClick
+                    }}>Watch Trailer on YouTube ▶️</Link>
+
                 </div>
             </div>
             ))}
