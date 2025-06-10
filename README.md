@@ -4,7 +4,7 @@
 
 **MVP - Minimum Viable Product**
 
-- Built with React using Components, Props, Routes, etc.
+- Built with React using Components, Props, Routes, Links, etc.
 - Calls a public API using Fetch.
 - Includes at least 1 C (Create), 1 R (Read) or 1 D (Delete) functionality using Airtable.
 - Deployment of App online using Netlify
@@ -25,6 +25,7 @@
 - As a user, I should be able to view the results of my search term at a glance, with page navigation at the bottom of the page to view the rest of the results in groups of 10 (as per the result limit in the fetched JSON file)
 - As a user, I should be able to click on the movie that I want and view it more comprehensively (i.e. Name of Director, Writer(s), Actor(s), Genre(s), Ratings and Full Plot Details).
 - As a user, I should be able to favourite any movie from the results page, as well as from the detailed page of a particular movie.
+- As a user, I should be able to have a YouTube link redirect to the respective movie trailer in the search results, in the detailed movie page and in the favourite movies page.
 - As a user, I should be able to keep track of which are my favorite movies, as well as being able to delete them, if necessary. (via Airtable)
 
 ## Project Wireframes
@@ -61,5 +62,6 @@
 
 ## References
 
-- [Open Movie Database API (OMDb)](https://omdbapi.com)
+- All movie information retrieved/fetched from [Open Movie Database API (OMDb)](https://omdbapi.com)
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Notifications by [React Toastify](https://www.npmjs.com/package/react-toastify)
