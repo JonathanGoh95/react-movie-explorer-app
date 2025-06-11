@@ -42,12 +42,6 @@ export default function SearchResults({movies, fetchMovieDetails, pages, selecte
             return;
         }
         
-        // Checks for Duplicates
-        if (favourites.some((fav) => movie.imdbID === fav.imdbID)) {
-            toast.info("This movie is already in your Favourite Movies!")
-            return;
-        }
-        
         // Appends the movie to the Favourites State and the Airtable API asynchronously
         try{
             const fullMovie = await details(movie.imdbID);  // Fetches the full movie details from OMDb asynchronously
@@ -87,10 +81,12 @@ export default function SearchResults({movies, fetchMovieDetails, pages, selecte
                     <h2 className="font-bold mt-2">{movie.Title}</h2>
                     <p>{movie.Year}</p>
                     <p>Type: {String(movie.Type).charAt(0).toUpperCase() + String(movie.Type).slice(1)}</p>
+                    {!favourites.some((mov) => mov.imdbID === movie.imdbID) && (
                     <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 w-3/4 cursor-pointer' onClick={(e) => {
                         e.stopPropagation(); // Prevents triggering of the parent div's onClick
                         handleFavourites(movie);
-                    }}>Add to Favourite Movies ⭐</button>
+                    }}>
+                    Add to Favourite Movies ⭐</button>)}
                     <Link to={`https://www.youtube.com/results?search_query=${(movie.Title).split(' ').join('+')}+${movie.Year}+Trailer`} className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-2 pr-2 cursor-pointer' target="_blank" onClick={(e) => {
                         e.stopPropagation(); // Prevents triggering of the parent div's onClick
                     }}>Watch Trailer on YouTube ▶️</Link>

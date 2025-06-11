@@ -23,12 +23,6 @@ export default function MovieDetails({selectedMovie,setSelectedMovie,favourites,
             return;
         }
         
-        // Checks for Duplicates
-        if (favourites.some((movie) => movie.imdbID === selectedMovie.imdbID)) {
-            toast.info("This movie is already in your Favourite Movies!")
-            return;
-        }
-        
         // Appends the movie to the Favourites State and the Airtable API asynchronously
         try{
             await create(selectedMovie)
@@ -73,7 +67,8 @@ export default function MovieDetails({selectedMovie,setSelectedMovie,favourites,
             <h2 className="font-bold mb-2">{selectedMovie.Title} ({selectedMovie.Year})</h2>
             <img src={selectedMovie.Poster} alt={selectedMovie.Title} className="border-2 rounded-lg mb-3" />
             <div className="flex gap-5">
-                <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleFavourites}>Add to Favourite Movies ⭐</button>
+                {!favourites.some((movie) => movie.imdbID === selectedMovie.imdbID) && (
+                <button className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-4 pr-4 cursor-pointer' onClick={handleFavourites}>Add to Favourite Movies ⭐</button>)}
                 <Link to={`https://www.youtube.com/results?search_query=${(selectedMovie.Title).split(' ').join('+')}+${selectedMovie.Year}+Trailer`} className='font-bold bg-white border-2 rounded-md pt-1 pb-1 pl-2 pr-2 cursor-pointer' target="_blank">Watch Trailer on YouTube ▶️</Link>
             </div>
             <p><strong>Rated:</strong> {selectedMovie.Rated}</p>

@@ -63,14 +63,14 @@ export default function FavouriteMovies({favourites, setFavourites}) {
         (<div className="flex items-start justify-center gap-5 text-2xl">
             <div className="flex gap-2">
                 <label className="font-bold" htmlFor="sort">Sort by: </label>
-                <select className="pt-1" id="sort" value={sortField} onChange={e => setSortField(e.target.value)}>
+                <select className="pt-1 border-2" id="sort" value={sortField} onChange={e => setSortField(e.target.value)}>
                     <option value='Title'>Movie Title</option>
                     <option value='Year'>Release Year</option>
                 </select>
             </div>
             <div className="flex gap-2">
                 <label className="font-bold" htmlFor="order">Order: </label>
-                <select className="pt-1" id="order" value={sortOrder} onChange={e => setSortOrder(e.target.value)}>
+                <select className="pt-1 border-2" id="order" value={sortOrder} onChange={e => setSortOrder(e.target.value)}>
                     <option value='asc'>Ascending</option>
                     <option value='des'>Descending</option>
                 </select>
